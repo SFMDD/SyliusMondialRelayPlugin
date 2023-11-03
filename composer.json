@@ -1,5 +1,5 @@
 {
-    "name": "sherlockode/sylius-mondial-relay-plugin",
+    "name": "fmdd/sylius-mondial-relay-plugin",
     "type": "sylius-plugin",
     "description": "Sylius plugin for Mondial Relay.",
     "keywords": [
