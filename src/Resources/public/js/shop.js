@@ -47,7 +47,6 @@ export default class MondialRelay
             this.modal.addEventListener('show.bs.modal', () => {
                 setTimeout(() => {
                     this.mapAdapter.invalidateSize();
-                    console.log("invalidate size");
                 }, 500);
             });
         }
