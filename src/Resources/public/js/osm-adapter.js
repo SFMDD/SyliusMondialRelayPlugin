@@ -69,6 +69,10 @@ export default class OsmAdapter
         }
     }
 
+    invalidateSize() {
+        this.map.invalidateSize();
+    };
+
     setMapCenter(position) {
         this.map.setView(L.latLng(parseFloat(position.lat), parseFloat(position.lng)));
     }
