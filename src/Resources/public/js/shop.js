@@ -1,6 +1,7 @@
 import AjaxRequest from './ajax-request';
 import Gmap from './gmap-adapter';
 import Osm from './osm-adapter';
+import * as bootstrap from "bootstrap";
 
 export default class MondialRelay
 {
@@ -39,13 +40,11 @@ export default class MondialRelay
     }
 
     addEventListeners() {
-        $(this.modal).modal({
-            onHidden: function () {
-                this.clearModalContent();
-            }.bind(this),
-            onApprove: function () {
-                this.setCheckoutPickupPoint();
-            }.bind(this)
+        this.modal.addEventListener('hidden.bs.modal', () => {
+            this.clearModalContent();
+        });
+        this.modal.querySelector('#mr-select-btn').addEventListener('click', () => {
+            this.setCheckoutPickupPoint();
         });
 
         this.shippingMethodForm.addEventListener('change', function () {
@@ -70,8 +69,8 @@ export default class MondialRelay
         document.addEventListener('click', function (event) {
             // Click to close modal
             if (-1 !== [].indexOf.call(this.modal.querySelectorAll('.close-modal'), event.target)) {
-                $(this.modal).modal('hide');
-
+                let modal = bootstrap.Modal.getOrCreateInstance(this.modal)
+                modal.hide();
                 return;
             }
 
@@ -176,8 +175,8 @@ export default class MondialRelay
                 this.modal.querySelector('.pickup-points-map').style.display = 'none';
                 this.modal.querySelector('button[data-mr-geolocalisation]').style.display = 'none';
             }
-
-            $(this.modal).modal('show');
+            let modal = bootstrap.Modal.getOrCreateInstance(this.modal)
+            modal.show();
 
             this.onSearchResultsUpdated(response.points || []);
         }.bind(this));
