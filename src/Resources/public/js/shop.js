@@ -43,6 +43,14 @@ export default class MondialRelay
         this.modal.addEventListener('hidden.bs.modal', () => {
             this.clearModalContent();
         });
+        if('open_street_map' === this.mapProvider) {
+            this.modal.addEventListener('show.bs.modal', () => {
+                setTimeout(() => {
+                    this.mapAdapter.invalidateSize();
+                    console.log("invalidate size");
+                }, 500);
+            });
+        }
         this.modal.querySelector('#mr-select-btn').addEventListener('click', () => {
             this.setCheckoutPickupPoint();
         });
