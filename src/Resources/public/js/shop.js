@@ -52,6 +52,8 @@ export default class MondialRelay
         }
         this.modal.querySelector('#mr-select-btn').addEventListener('click', () => {
             this.setCheckoutPickupPoint();
+            let modal = bootstrap.Modal.getOrCreateInstance(this.modal)
+            modal.hide();
         });
 
         this.shippingMethodForm.addEventListener('change', function () {
@@ -168,9 +170,7 @@ export default class MondialRelay
         request.send().then(function (response) {
             currentPointWrapper.innerHTML = response;
             currentPointWrapper.style.display = 'block';
-            
-            let modal = bootstrap.Modal.getOrCreateInstance(this.modal)
-            this.modal.hide();
+
         }.bind(this));
     }
 
