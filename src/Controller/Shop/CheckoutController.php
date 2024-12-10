@@ -132,7 +132,10 @@ class CheckoutController
         $form = $this->getPickupPointSearchForm(['zipCode' => $zipCode, 'types' => $actions]);
 
         try {
-            $points = $this->apiClient->findPickupPointsByZipCode($zipCode, $actions);
+            $points = [];
+            if($zipcode) {
+                $points = $this->apiClient->findPickupPointsByZipCode($zipCode, $actions);
+            }
         } catch (\Exception $e) {
             $points = [];
         }
